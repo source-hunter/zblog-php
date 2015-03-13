@@ -1,15 +1,15 @@
 <?php
 /**
- * ÊÂ¼þÏà¹Øº¯Êý
+ * äº‹ä»¶ç›¸å…³å‡½æ•°
  * @package Z-BlogPHP
- * @subpackage System\Event ²Ù×÷ÊÂ¼þ
+ * @subpackage System\Event æ“ä½œäº‹ä»¶
  * @copyright (C) RainbowSoft Studio
  */
 
 
 ################################################################################################################
 /**
- * ÑéÖ¤µÇÂ¼
+ * éªŒè¯ç™»å½•
  * @return bool
  */
 function VerifyLogin() {
@@ -46,7 +46,7 @@ function VerifyLogin() {
 }
 
 /**
- * ×¢ÏúµÇÂ¼
+ * æ³¨é”€ç™»å½•
  */
 function Logout() {
 	global $zbp;
@@ -59,8 +59,8 @@ function Logout() {
 
 ################################################################################################################
 /**
- * »ñÈ¡ÎÄÕÂ
- * @param mixed $idorname ÎÄÕÂid »ò Ãû³Æ¡¢±ðÃû
+ * èŽ·å–æ–‡ç« 
+ * @param mixed $idorname æ–‡ç« id æˆ– åç§°ã€åˆ«å
  * @param array $option|null
  * @return Post
  */
@@ -96,13 +96,13 @@ function GetPost($idorname, $option = null) {
 }
 
 /**
- * »ñÈ¡ÎÄÕÂÁÐ±í
- * @param int $count ÊýÁ¿
- * @param null $cate ·ÖÀàID
- * @param null $auth ÓÃ»§ID
- * @param null $date ÈÕÆÚ
- * @param null $tags ±êÇ©
- * @param null $search ËÑË÷¹Ø¼ü´Ê
+ * èŽ·å–æ–‡ç« åˆ—è¡¨
+ * @param int $count æ•°é‡
+ * @param null $cate åˆ†ç±»ID
+ * @param null $auth ç”¨æˆ·ID
+ * @param null $date æ—¥æœŸ
+ * @param null $tags æ ‡ç­¾
+ * @param null $search æœç´¢å…³é”®è¯
  * @param null $option
  * @return array|mixed
  */
@@ -233,7 +233,7 @@ function GetList($count = 10, $cate = null, $auth = null, $date = null, $tags = 
 
 ################################################################################################################
 /**
- * ViewIndex,Ê×Ò³£¬ËÑË÷Ò³£¬feedÒ³µÄÖ÷º¯Êý
+ * ViewIndex,é¦–é¡µï¼Œæœç´¢é¡µï¼Œfeedé¡µçš„ä¸»å‡½æ•°
  * @api Filter_Plugin_ViewIndex_Begin
  * @return mixed
  */
@@ -272,7 +272,7 @@ function ViewIndex(){
 }
 
 /**
- * ÏÔÊ¾RSS2Feed
+ * æ˜¾ç¤ºRSS2Feed
  * @api Filter_Plugin_ViewFeed_Begin
  * @return mixed
  */
@@ -309,7 +309,7 @@ function ViewFeed(){
 }
 
 /**
- * Õ¹Ê¾ËÑË÷½á¹û
+ * å±•ç¤ºæœç´¢ç»“æžœ
  * @api Filter_Plugin_ViewSearch_Begin
  * @api Filter_Plugin_ViewPost_Template
  * @return mixed
@@ -392,10 +392,10 @@ function ViewSearch(){
 
 ################################################################################################################
 /**
- * ¸ù¾ÝRewrite_url¹æÔòÏÔÊ¾Ò³Ãæ
+ * æ ¹æ®Rewrite_urlè§„åˆ™æ˜¾ç¤ºé¡µé¢
  * @api Filter_Plugin_ViewAuto_Begin
  * @api Filter_Plugin_ViewAuto_End
- * @param string $inpurl Ò³Ãæurl
+ * @param string $inpurl é¡µé¢url
  * @return null|string
  */
 function ViewAuto($inpurl) {
@@ -409,11 +409,12 @@ function ViewAuto($inpurl) {
 	}
 	
 	$url=GetValueInArray(explode('?',$inpurl),'0');
+
 	if($zbp->cookiespath === substr($url, 0 , strlen($zbp->cookiespath)))
 		$url = substr($url, strlen($zbp->cookiespath));
-	
+
 	if (isset($_SERVER['SERVER_SOFTWARE']) && (strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false) && (isset($_GET['rewrite']) == true)){
-		//iis+httpd.iniÏÂÈç¹û´æÔÚÕæÊµÎÄ¼þ
+		//iis+httpd.iniä¸‹å¦‚æžœå­˜åœ¨çœŸå®žæ–‡ä»¶
 		$realurl = $zbp->path . urldecode($url);
 		if(is_readable($realurl)&&is_file($realurl)){
 			die(file_get_contents($realurl));
@@ -522,15 +523,15 @@ function ViewAuto($inpurl) {
 }
 
 /**
- * ÏÔÊ¾ÁÐ±íÒ³Ãæ
+ * æ˜¾ç¤ºåˆ—è¡¨é¡µé¢
  * @api Filter_Plugin_ViewList_Begin
  * @api Filter_Plugin_ViewList_Template
  * @param int $page
  * @param int|string $cate
  * @param int|string $auth
  * @param string   $date
- * @param string $tags tagsÁÐ±í
- * @param bool $isrewrite ÊÇ·ñÆôÓÃurlrewrite
+ * @param string $tags tagsåˆ—è¡¨
+ * @param bool $isrewrite æ˜¯å¦å¯ç”¨urlrewrite
  * @return string
  */
 function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
@@ -779,10 +780,10 @@ function ViewList($page, $cate, $auth, $date, $tags, $isrewrite = false) {
 }
 
 /**
- * ÏÔÊ¾ÎÄÕÂ
- * @param int $id ÎÄÕÂID
- * @param string $alias ÎÄÕÂ±ðÃû
- * @param bool $isrewrite ÊÇ·ñÆôÓÃurlrewrite
+ * æ˜¾ç¤ºæ–‡ç« 
+ * @param int $id æ–‡ç« ID
+ * @param string $alias æ–‡ç« åˆ«å
+ * @param bool $isrewrite æ˜¯å¦å¯ç”¨urlrewrite
  * @return string
  */
 function ViewPost($id, $alias, $isrewrite = false) {
@@ -908,9 +909,9 @@ function ViewPost($id, $alias, $isrewrite = false) {
 }
 
 /**
- * ÏÔÊ¾ÎÄÕÂÏÂÆÀÂÛÁÐ±í
- * @param int $postid ÎÄÕÂID
- * @param int $page Ò³Êý
+ * æ˜¾ç¤ºæ–‡ç« ä¸‹è¯„è®ºåˆ—è¡¨
+ * @param int $postid æ–‡ç« ID
+ * @param int $page é¡µæ•°
  * @return bool
  */
 function ViewComments($postid, $page) {
@@ -994,8 +995,8 @@ function ViewComments($postid, $page) {
 }
 
 /**
- * ÏÔÊ¾ÆÀÂÛ
- * @param int $id ÆÀÂÛID
+ * æ˜¾ç¤ºè¯„è®º
+ * @param int $id è¯„è®ºID
  */
 function ViewComment($id) {
 	global $zbp;
@@ -1021,7 +1022,7 @@ function ViewComment($id) {
 
 ################################################################################################################
 /**
- * Ìá½»ÎÄÕÂÊý¾Ý
+ * æäº¤æ–‡ç« æ•°æ®
  * @api Filter_Plugin_PostArticle_Core
  * @api Filter_Plugin_PostArticle_Succeed
  * @return bool
@@ -1137,7 +1138,7 @@ function PostArticle() {
 
 	$article->Save();
 
-	//¸üÐÂÍ³¼ÆÐÅÏ¢
+	//æ›´æ–°ç»Ÿè®¡ä¿¡æ¯
 	$pre_arrayTag = $zbp->LoadTagsByIDString($pre_tag);
 	$now_arrayTag = $zbp->LoadTagsByIDString($article->Tag);
 	$pre_array = $now_array = array();
@@ -1193,7 +1194,7 @@ function PostArticle() {
 }
 
 /**
- * É¾³ýÎÄÕÂ
+ * åˆ é™¤æ–‡ç« 
  * @return bool
  */
 function DelArticle() {
@@ -1246,16 +1247,16 @@ function DelArticle() {
 }
 
 /**
- * Ìá½»ÎÄÕÂÊý¾ÝÊ±¼ì²étagÊý¾Ý£¬²¢½«ÐÂtags×ªÎª±ê×¼¸ñÊ½·µ»Ø
- * @param string $tagnamestring Ìá½»µÄÎÄÕÂtagÊý¾Ý£¬¿ÉÒÔ:,£¬¡¢µÈ·ûºÅ·Ö¸ô
- * @return string ·µ»ØÈç'{1}{2}{3}{4}'µÄ×Ö·û´®
+ * æäº¤æ–‡ç« æ•°æ®æ—¶æ£€æŸ¥tagæ•°æ®ï¼Œå¹¶å°†æ–°tagsè½¬ä¸ºæ ‡å‡†æ ¼å¼è¿”å›ž
+ * @param string $tagnamestring æäº¤çš„æ–‡ç« tagæ•°æ®ï¼Œå¯ä»¥:,ï¼Œã€ç­‰ç¬¦å·åˆ†éš”
+ * @return string è¿”å›žå¦‚'{1}{2}{3}{4}'çš„å­—ç¬¦ä¸²
  */
 function PostArticle_CheckTagAndConvertIDtoString($tagnamestring) {
 	global $zbp;
 	$s = '';
 	$tagnamestring = str_replace(';', ',', $tagnamestring);
-	$tagnamestring = str_replace('£¬', ',', $tagnamestring);
-	$tagnamestring = str_replace('¡¢', ',', $tagnamestring);
+	$tagnamestring = str_replace('ï¼Œ', ',', $tagnamestring);
+	$tagnamestring = str_replace('ã€', ',', $tagnamestring);
 	$tagnamestring = strip_tags($tagnamestring);
 	$tagnamestring = trim($tagnamestring);
 	if ($tagnamestring == '')
@@ -1297,8 +1298,8 @@ function PostArticle_CheckTagAndConvertIDtoString($tagnamestring) {
 }
 
 /**
- * É¾³ýÎÄÕÂÏÂËùÓÐÆÀÂÛ
- * @param int $id ÎÄÕÂID
+ * åˆ é™¤æ–‡ç« ä¸‹æ‰€æœ‰è¯„è®º
+ * @param int $id æ–‡ç« ID
  */
 function DelArticle_Comments($id) {
 	global $zbp;
@@ -1309,7 +1310,7 @@ function DelArticle_Comments($id) {
 
 ################################################################################################################
 /**
- * Ìá½»Ò³ÃæÊý¾Ý
+ * æäº¤é¡µé¢æ•°æ®
  * @return bool
  */
 function PostPage() {
@@ -1385,7 +1386,7 @@ function PostPage() {
 }
 
 /**
- * É¾³ýÒ³Ãæ
+ * åˆ é™¤é¡µé¢
  * @return bool
  */
 function DelPage() {
@@ -1423,7 +1424,7 @@ function DelPage() {
 
 ################################################################################################################
 /**
- * Ìá½»ÆÀÂÛ
+ * æäº¤è¯„è®º
  * @return bool
  */
 function PostComment() {
@@ -1441,7 +1442,7 @@ function PostComment() {
 		}
 	}
 
-	//ÅÐ¶ÏÊÇ²»ÊÇÓÐÍ¬Ãû£¨±ðÃû£©µÄÓÃ»§
+	//åˆ¤æ–­æ˜¯ä¸æ˜¯æœ‰åŒåï¼ˆåˆ«åï¼‰çš„ç”¨æˆ·
 	$m = $zbp->GetMemberByNameOrAlias($_POST['name']);
 	if ($m->ID > 0){
 		if($m->ID != $zbp->user->ID){
@@ -1525,7 +1526,7 @@ function PostComment() {
 }
 
 /**
- * É¾³ýÆÀÂÛ
+ * åˆ é™¤è¯„è®º
  * @return bool
  */
 function DelComment() {
@@ -1558,8 +1559,8 @@ function DelComment() {
 }
 
 /**
- * É¾³ýÆÀÂÛÏÂµÄ×ÓÆÀÂÛ
- * @param int $id ¸¸ÆÀÂÛID
+ * åˆ é™¤è¯„è®ºä¸‹çš„å­è¯„è®º
+ * @param int $id çˆ¶è¯„è®ºID
  */
 function DelComment_Children($id) {
 	global $zbp;
@@ -1581,9 +1582,9 @@ function DelComment_Children($id) {
 }
 
 /**
- * Ö»Àú±é²¢±£ÁôÆÀÂÛid½øarray,²»½øÐÐÉ¾³ý
- * @param int $id ¸¸ÆÀÂÛID
- * @param array $array ½«×ÓÆÀÂÛID´æÈëÐÂÊý×é
+ * åªåŽ†éå¹¶ä¿ç•™è¯„è®ºidè¿›array,ä¸è¿›è¡Œåˆ é™¤
+ * @param int $id çˆ¶è¯„è®ºID
+ * @param array $array å°†å­è¯„è®ºIDå­˜å…¥æ–°æ•°ç»„
  */
 function DelComment_Children_NoDel($id, &$array) {
 	global $zbp;
@@ -1600,7 +1601,7 @@ function DelComment_Children_NoDel($id, &$array) {
 }
 
 /**
- *¼ì²éÆÀÂÛÊý¾Ý²¢±£´æ¡¢¸üÐÂ¼ÆÊý¡¢¸üÐÂ¡°×îÐÂÆÀÂÛ¡±Ä£¿é
+ *æ£€æŸ¥è¯„è®ºæ•°æ®å¹¶ä¿å­˜ã€æ›´æ–°è®¡æ•°ã€æ›´æ–°â€œæœ€æ–°è¯„è®ºâ€æ¨¡å—
  */
 function CheckComment() {
 	global $zbp;
@@ -1629,7 +1630,7 @@ function CheckComment() {
 }
 
 /**
- * ÆÀÂÛÅúÁ¿´¦Àí£¨É¾³ý¡¢Í¨¹ýÉóºË¡¢¼ÓÈëÉóºË£©
+ * è¯„è®ºæ‰¹é‡å¤„ç†ï¼ˆåˆ é™¤ã€é€šè¿‡å®¡æ ¸ã€åŠ å…¥å®¡æ ¸ï¼‰
  */
 function BatchComment() {
 	global $zbp;
@@ -1687,7 +1688,7 @@ function BatchComment() {
 
 ################################################################################################################
 /**
- * Ìá½»·ÖÀàÊý¾Ý
+ * æäº¤åˆ†ç±»æ•°æ®
  * @return bool
  */
 function PostCategory() {
@@ -1722,13 +1723,13 @@ function PostCategory() {
 		$fpname($cate);
 	}
 
-	//Ë¢ÐÂRootID
+	//åˆ·æ–°RootID
 	$cate->Level;
 	
 	FilterCategory($cate);
 	FilterMeta($cate);
 
-	// ´Ë´¦ÓÃ×÷Ë¢ÐÂ·ÖÀàÄÚÎÄÕÂÊý¾ÝÊ¹ÓÃ£¬²»×÷¸ü¸Ä
+	// æ­¤å¤„ç”¨ä½œåˆ·æ–°åˆ†ç±»å†…æ–‡ç« æ•°æ®ä½¿ç”¨ï¼Œä¸ä½œæ›´æ”¹
 	CountCategory($cate);
 
 	$cate->Save();
@@ -1748,7 +1749,7 @@ function PostCategory() {
 }
 
 /**
- * É¾³ý·ÖÀà
+ * åˆ é™¤åˆ†ç±»
  * @return bool
  */
 function DelCategory() {
@@ -1772,8 +1773,8 @@ function DelCategory() {
 }
 
 /**
- * É¾³ý·ÖÀàÏÂËùÓÐÎÄÕÂ
- * @param int $id ·ÖÀàID
+ * åˆ é™¤åˆ†ç±»ä¸‹æ‰€æœ‰æ–‡ç« 
+ * @param int $id åˆ†ç±»ID
  */
 function DelCategory_Articles($id) {
 	global $zbp;
@@ -1784,7 +1785,7 @@ function DelCategory_Articles($id) {
 
 ################################################################################################################
 /**
- * Ìá½»±êÇ©Êý¾Ý
+ * æäº¤æ ‡ç­¾æ•°æ®
  * @return bool
  */
 function PostTag() {
@@ -1833,7 +1834,7 @@ function PostTag() {
 }
 
 /**
- * É¾³ý±êÇ©
+ * åˆ é™¤æ ‡ç­¾
  * @return bool
  */
 function DelTag() {
@@ -1854,7 +1855,7 @@ function DelTag() {
 
 ################################################################################################################
 /**
- * Ìá½»ÓÃ»§Êý¾Ý
+ * æäº¤ç”¨æˆ·æ•°æ®
  * @return bool
  */
 function PostMember() {
@@ -1881,7 +1882,7 @@ function PostMember() {
 	}
 
 	if (isset($_POST['Name'])) {
-		//zbp×Ô´øÊý¾Ý¼ì²âÍ¬Ãû
+		//zbpè‡ªå¸¦æ•°æ®æ£€æµ‹åŒå
 		if (isset($zbp->membersbyname[$_POST['Name']])) {
 			if ($zbp->membersbyname[$_POST['Name']]->ID <> $_POST['ID']) {
 				$zbp->ShowError(62, __FILE__, __LINE__);
@@ -1927,7 +1928,7 @@ function PostMember() {
 	CountMember($mem);
 	
 	if (isset($_POST['Name'])) {
-		//Member±í²éÑ¯Í¬Ãû
+		//Memberè¡¨æŸ¥è¯¢åŒå
 		if (GetVars('ID', 'POST') == 0) {
 			if ($zbp->CheckMemberNameExist($_POST['Name'])==true) {
 				$zbp->ShowError(62, __FILE__, __LINE__);
@@ -1950,7 +1951,7 @@ function PostMember() {
 }
 
 /**
- * É¾³ýÓÃ»§
+ * åˆ é™¤ç”¨æˆ·
  * @return bool
  */
 function DelMember() {
@@ -1973,8 +1974,8 @@ function DelMember() {
 }
 
 /**
- * É¾³ýÓÃ»§ÏÂËùÓÐÊý¾Ý£¨°üÀ¨ÎÄÕÂ¡¢ÆÀÂÛ¡¢¸½¼þ£©
- * @param int $id ÓÃ»§ID
+ * åˆ é™¤ç”¨æˆ·ä¸‹æ‰€æœ‰æ•°æ®ï¼ˆåŒ…æ‹¬æ–‡ç« ã€è¯„è®ºã€é™„ä»¶ï¼‰
+ * @param int $id ç”¨æˆ·ID
  */
 function DelMember_AllData($id) {
 	global $zbp;
@@ -2007,7 +2008,7 @@ function DelMember_AllData($id) {
 
 ################################################################################################################
 /**
- * Ìá½»Ä£¿éÊý¾Ý
+ * æäº¤æ¨¡å—æ•°æ®
  * @return bool
  */
 function PostModule() {
@@ -2076,7 +2077,7 @@ function PostModule() {
 }
 
 /**
- * É¾³ýÄ£¿é
+ * åˆ é™¤æ¨¡å—
  * @return bool
  */
 function DelModule() {
@@ -2115,7 +2116,7 @@ function DelModule() {
 
 ################################################################################################################
 /**
- * ¸½¼þÉÏ´«
+ * é™„ä»¶ä¸Šä¼ 
  */
 function PostUpload() {
 	global $zbp;
@@ -2149,7 +2150,7 @@ function PostUpload() {
 }
 
 /**
- * É¾³ý¸½¼þ
+ * åˆ é™¤é™„ä»¶
  * @return bool
  */
 function DelUpload() {
@@ -2170,9 +2171,9 @@ function DelUpload() {
 
 ################################################################################################################
 /**
- * ÆôÓÃ²å¼þ
- * @param string $name ²å¼þID
- * @return string ·µ»Ø²å¼þID
+ * å¯ç”¨æ’ä»¶
+ * @param string $name æ’ä»¶ID
+ * @return string è¿”å›žæ’ä»¶ID
  */
 function EnablePlugin($name) {
 	global $zbp;
@@ -2195,8 +2196,8 @@ function EnablePlugin($name) {
 }
 
 /**
- * ½ûÓÃ²å¼þ
- * @param string $name ²å¼þID
+ * ç¦ç”¨æ’ä»¶
+ * @param string $name æ’ä»¶ID
  */
 function DisablePlugin($name) {
 	global $zbp;
@@ -2213,10 +2214,10 @@ function DisablePlugin($name) {
 }
 
 /**
- * ÉèÖÃµ±Ç°Ö÷ÌâÑùÊ½
- * @param string $theme Ö÷ÌâID
- * @param string $style ÑùÊ½Ãû
- * @return string ·µ»ØÖ÷ÌâID
+ * è®¾ç½®å½“å‰ä¸»é¢˜æ ·å¼
+ * @param string $theme ä¸»é¢˜ID
+ * @param string $style æ ·å¼å
+ * @return string è¿”å›žä¸»é¢˜ID
  */
 function SetTheme($theme, $style) {
 	global $zbp;
@@ -2275,7 +2276,7 @@ function SetTheme($theme, $style) {
 }
 
 /**
- * ÉèÖÃ²àÀ¸
+ * è®¾ç½®ä¾§æ 
  */
 function SetSidebar() {
 	global $zbp;
@@ -2289,7 +2290,7 @@ function SetSidebar() {
 }
 
 /**
- * ±£´æÍøÕ¾ÉèÖÃÑ¡Ïî
+ * ä¿å­˜ç½‘ç«™è®¾ç½®é€‰é¡¹
  */
 function SaveSetting() {
 	global $zbp;
@@ -2337,7 +2338,7 @@ function SaveSetting() {
 
 ################################################################################################################
 /**
- * ¹ýÂËÀ©Õ¹Êý¾Ý
+ * è¿‡æ»¤æ‰©å±•æ•°æ®
  * @param $object
  */
 function FilterMeta(&$object) {
@@ -2359,7 +2360,7 @@ function FilterMeta(&$object) {
 }
 
 /**
- * ¹ýÂËÆÀÂÛÊý¾Ý
+ * è¿‡æ»¤è¯„è®ºæ•°æ®
  * @param $comment
  */
 function FilterComment(&$comment) {
@@ -2389,7 +2390,7 @@ function FilterComment(&$comment) {
 }
 
 /**
- * ¹ýÂËÎÄÕÂÊý¾Ý
+ * è¿‡æ»¤æ–‡ç« æ•°æ®
  * @param $article
  */
 function FilterPost(&$article) {
@@ -2419,7 +2420,7 @@ function FilterPost(&$article) {
 }
 
 /**
- * ¹ýÂËÓÃ»§Êý¾Ý
+ * è¿‡æ»¤ç”¨æˆ·æ•°æ®
  * @param $member
  */
 function FilterMember(&$member) {
@@ -2462,7 +2463,7 @@ function FilterMember(&$member) {
 }
 
 /**
- * ¹ýÂËÄ£¿éÊý¾Ý
+ * è¿‡æ»¤æ¨¡å—æ•°æ®
  * @param $module
  */
 function FilterModule(&$module) {
@@ -2472,7 +2473,7 @@ function FilterModule(&$module) {
 }
 
 /**
- * ¹ýÂË·ÖÀàÊý¾Ý
+ * è¿‡æ»¤åˆ†ç±»æ•°æ®
  * @param $category
  */
 function FilterCategory(&$category) {
@@ -2486,7 +2487,7 @@ function FilterCategory(&$category) {
 }
 
 /**
- * ¹ýÂËtagÊý¾Ý
+ * è¿‡æ»¤tagæ•°æ®
  * @param $tag
  */
 function FilterTag(&$tag) {
@@ -2496,10 +2497,10 @@ function FilterTag(&$tag) {
 }
 
 ################################################################################################################
-#Í³¼Æº¯Êý
+#ç»Ÿè®¡å‡½æ•°
 /**
- *Í³¼ÆÖÃ¶¥ÎÄÕÂÊý×é
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ *ç»Ÿè®¡ç½®é¡¶æ–‡ç« æ•°ç»„
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountTopArticle($addplus = null,$delplus=null) {
 	global $zbp;
@@ -2525,9 +2526,9 @@ function CountTopArticle($addplus = null,$delplus=null) {
 }
 
 /**
- *Í³¼ÆÆÀÂÛÊý
- * @param int $allplus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè ×ÜÆÀÂÛ
- * @param int $chkplus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè Î´ÉóºËÆÀÂÛ
+ *ç»Ÿè®¡è¯„è®ºæ•°
+ * @param int $allplus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ æ€»è¯„è®º
+ * @param int $chkplus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ æœªå®¡æ ¸è¯„è®º
  */
 function CountCommentNums($allplus = null,$chkplus = null) {
 	global $zbp;
@@ -2546,8 +2547,8 @@ function CountCommentNums($allplus = null,$chkplus = null) {
 }
 
 /**
- *Í³¼Æ¹«¿ªÎÄÕÂÊý
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ *ç»Ÿè®¡å…¬å¼€æ–‡ç« æ•°
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountNormalArticleNums($plus = null) {
 	global $zbp;
@@ -2564,9 +2565,9 @@ function CountNormalArticleNums($plus = null) {
 }
 
 /**
- * Í³¼ÆÎÄÕÂÏÂÆÀÂÛÊý
+ * ç»Ÿè®¡æ–‡ç« ä¸‹è¯„è®ºæ•°
  * @param post $article
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountPost(&$article, $plus = null) {
 	global $zbp;
@@ -2585,9 +2586,9 @@ function CountPost(&$article, $plus = null) {
 }
 
 /**
- * ÅúÁ¿Í³¼ÆÖ¸¶¨ÎÄÕÂÏÂÆÀÂÛÊý²¢±£´æ
- * @param array $array ¼ÇÂ¼ÎÄÕÂIDµÄÊý×é
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * æ‰¹é‡ç»Ÿè®¡æŒ‡å®šæ–‡ç« ä¸‹è¯„è®ºæ•°å¹¶ä¿å­˜
+ * @param array $array è®°å½•æ–‡ç« IDçš„æ•°ç»„
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountPostArray($array, $plus = null) {
 	global $zbp;
@@ -2603,9 +2604,9 @@ function CountPostArray($array, $plus = null) {
 }
 
 /**
- * Í³¼Æ·ÖÀàÏÂÎÄÕÂÊý
+ * ç»Ÿè®¡åˆ†ç±»ä¸‹æ–‡ç« æ•°
  * @param category &$category
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountCategory(&$category, $plus = null) {
 	global $zbp;
@@ -2624,9 +2625,9 @@ function CountCategory(&$category, $plus = null) {
 }
 
 /**
- * ÅúÁ¿Í³¼ÆÖ¸¶¨·ÖÀàÏÂÎÄÕÂÊý²¢±£´æ
- * @param array $array ¼ÇÂ¼·ÖÀàIDµÄÊý×é
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * æ‰¹é‡ç»Ÿè®¡æŒ‡å®šåˆ†ç±»ä¸‹æ–‡ç« æ•°å¹¶ä¿å­˜
+ * @param array $array è®°å½•åˆ†ç±»IDçš„æ•°ç»„
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountCategoryArray($array, $plus = null) {
 	global $zbp;
@@ -2639,9 +2640,9 @@ function CountCategoryArray($array, $plus = null) {
 }
 
 /**
- * Í³¼ÆtagÏÂµÄÎÄÕÂÊý
+ * ç»Ÿè®¡tagä¸‹çš„æ–‡ç« æ•°
  * @param tag &$tag
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountTag(&$tag, $plus = null) {
 	global $zbp;
@@ -2660,15 +2661,15 @@ function CountTag(&$tag, $plus = null) {
 }
 
 /**
- * ÅúÁ¿Í³¼ÆÖ¸¶¨tagÏÂÎÄÕÂÊý²¢±£´æ
- * @param string $string ÀàËÆ'{1}{2}{3}{4}{4}'µÄtagID´®
- * @param int $plus ¿ØÖÆÊÇ·ñÒª½øÐÐÈ«±íÉ¨Ãè
+ * æ‰¹é‡ç»Ÿè®¡æŒ‡å®štagä¸‹æ–‡ç« æ•°å¹¶ä¿å­˜
+ * @param string $string ç±»ä¼¼'{1}{2}{3}{4}{4}'çš„tagIDä¸²
+ * @param int $plus æŽ§åˆ¶æ˜¯å¦è¦è¿›è¡Œå…¨è¡¨æ‰«æ
  */
 function CountTagArrayString($string, $plus = null, $articleid = null) {
 	global $zbp;
 	$array = $zbp->LoadTagsByIDString($string);
 
-	//Ìí¼Ó´óÊý¾Ý½Ó¿Ú,tag,plus,id
+	//æ·»åŠ å¤§æ•°æ®æŽ¥å£,tag,plus,id
 	foreach ($GLOBALS['Filter_Plugin_LargeData_CountTagArray'] as $fpname => &$fpsignal) {
 		$fpreturn = $fpname($array,$plus,$articleid);
 		if ($fpsignal == PLUGIN_EXITSIGNAL_RETURN) {
@@ -2683,9 +2684,9 @@ function CountTagArrayString($string, $plus = null, $articleid = null) {
 }
 
 /**
- * Í³¼ÆÓÃ»§ÏÂµÄÎÄÕÂÊý¡¢Ò³ÃæÊý¡¢ÆÀÂÛÊý¡¢¸½¼þÊýµÈ
+ * ç»Ÿè®¡ç”¨æˆ·ä¸‹çš„æ–‡ç« æ•°ã€é¡µé¢æ•°ã€è¯„è®ºæ•°ã€é™„ä»¶æ•°ç­‰
  * @param $member
- * @param array $plus ÉèÖÃÊÇ·ñÐèÒªÍêÈ«È«±íÉ¨Ãè
+ * @param array $plus è®¾ç½®æ˜¯å¦éœ€è¦å®Œå…¨å…¨è¡¨æ‰«æ
  */
 function CountMember(&$member, $plus = array(null, null, null, null)) {
 	global $zbp;
@@ -2733,9 +2734,9 @@ function CountMember(&$member, $plus = array(null, null, null, null)) {
 }
 
 /**
- * ÅúÁ¿Í³¼ÆÖ¸¶¨ÓÃ»§Êý¾Ý²¢±£´æ
- * @param array $array ¼ÇÂ¼ÓÃ»§IDµÄÊý×é
- * @param array $plus ÉèÖÃÊÇ·ñÐèÒªÍêÈ«È«±íÉ¨Ãè
+ * æ‰¹é‡ç»Ÿè®¡æŒ‡å®šç”¨æˆ·æ•°æ®å¹¶ä¿å­˜
+ * @param array $array è®°å½•ç”¨æˆ·IDçš„æ•°ç»„
+ * @param array $plus è®¾ç½®æ˜¯å¦éœ€è¦å®Œå…¨å…¨è¡¨æ‰«æ
  */
 function CountMemberArray($array, $plus = array(null, null, null, null)) {
 	global $zbp;
@@ -2753,8 +2754,8 @@ function CountMemberArray($array, $plus = array(null, null, null, null)) {
 ################################################################################################################
 #BuildModule
 /**
- * µ¼³öÍøÕ¾·ÖÀàÄ£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºç½‘ç«™åˆ†ç±»æ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_catalog() {
 	global $zbp;
@@ -2812,9 +2813,9 @@ function BuildModule_catalog() {
 }
 
 /**
- * µ¼³öÈÕÀúÄ£¿éÊý¾Ý
- * @param string $date ÈÕÆÚ
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºæ—¥åŽ†æ¨¡å—æ•°æ®
+ * @param string $date æ—¥æœŸ
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_calendar($date = '') {
 	global $zbp;
@@ -2831,7 +2832,7 @@ function BuildModule_calendar($date = '') {
 	$url->Rules['{%month%}'] = date('n', $value);
 
 	$url->Rules['{%day%}'] = 1;
-	$s .= '<a href="' . $url->Make() . '">?</a>';
+	$s .= '<a href="' . $url->Make() . '">Â«</a>';
 
 	$value = strtotime($date);
 	$url->Rules['{%date%}'] = date('Y-n', $value);
@@ -2843,7 +2844,7 @@ function BuildModule_calendar($date = '') {
 	$url->Rules['{%date%}'] = date('Y-n', $value);
 	$url->Rules['{%year%}'] = date('Y', $value);
 	$url->Rules['{%month%}'] = date('n', $value);
-	$s .= '<a href="' . $url->Make() . '">?</a></caption>';
+	$s .= '<a href="' . $url->Make() . '">Â»</a></caption>';
 
 	$s .= '<thead><tr>';
 	for ($i = 1; $i < 8; $i++) {
@@ -2920,8 +2921,8 @@ function BuildModule_calendar($date = '') {
 }
 
 /**
- * µ¼³ö×îÐÂÁôÑÔÄ£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºæœ€æ–°ç•™è¨€æ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_comments() {
 	global $zbp;
@@ -2939,8 +2940,8 @@ function BuildModule_comments() {
 }
 
 /**
- * µ¼³ö×î½ü·¢±íÎÄÕÂÄ£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºæœ€è¿‘å‘è¡¨æ–‡ç« æ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_previous() {
 	global $zbp;
@@ -2957,8 +2958,8 @@ function BuildModule_previous() {
 }
 
 /**
- * µ¼³öÎÄÕÂ¹éµµÄ£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºæ–‡ç« å½’æ¡£æ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_archives() {
 	global $zbp;
@@ -3027,8 +3028,8 @@ function BuildModule_archives() {
 }
 
 /**
- * µ¼³öµ¼º½Ä£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºå¯¼èˆªæ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_navbar() {
 	global $zbp;
@@ -3084,8 +3085,8 @@ function BuildModule_navbar() {
 }
 
 /**
- * µ¼³ötagsÄ£¿éÊý¾Ý
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºtagsæ¨¡å—æ•°æ®
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_tags() {
 	global $zbp;
@@ -3107,9 +3108,9 @@ function BuildModule_tags() {
 }
 
 /**
- * µ¼³öÓÃ»§ÁÐ±íÄ£¿éÊý¾Ý
- * @param int $level Òªµ¼³öµÄÓÃ»§×îµÍµÈ¼¶£¬Ä¬ÈÏÎª4£¨¼´Ð­×÷Õß£©
- * @return string Ä£¿éÄÚÈÝ
+ * å¯¼å‡ºç”¨æˆ·åˆ—è¡¨æ¨¡å—æ•°æ®
+ * @param int $level è¦å¯¼å‡ºçš„ç”¨æˆ·æœ€ä½Žç­‰çº§ï¼Œé»˜è®¤ä¸º4ï¼ˆå³åä½œè€…ï¼‰
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_authors($level = 4) {
 	global $zbp;
@@ -3128,9 +3129,9 @@ function BuildModule_authors($level = 4) {
 }
 
 /**
- * µ¼³öÍøÕ¾Í³¼ÆÄ£¿éÊý¾Ý
+ * å¯¼å‡ºç½‘ç«™ç»Ÿè®¡æ¨¡å—æ•°æ®
  * @param array $array
- * @return string Ä£¿éÄÚÈÝ
+ * @return string æ¨¡å—å†…å®¹
  */
 function BuildModule_statistics($array = array()) {
 	global $zbp;
@@ -3170,9 +3171,9 @@ function BuildModule_statistics($array = array()) {
 
 ################################################################################################################
 /**
- * ÏÔÊ¾404Ò³Ãæ(ÄÚÖÃ²å¼þº¯Êý)
+ * æ˜¾ç¤º404é¡µé¢(å†…ç½®æ’ä»¶å‡½æ•°)
  *
- * ¿ÉÍ¨¹ýÖ÷ÌâÖÐµÄ404.phpÄ£°å×Ô¶¨ÒåÏÔÊ¾Ð§¹û
+ * å¯é€šè¿‡ä¸»é¢˜ä¸­çš„404.phpæ¨¡æ¿è‡ªå®šä¹‰æ˜¾ç¤ºæ•ˆæžœ
  * @api Filter_Plugin_Zbp_ShowError
  * @param $idortext
  * @param $file
@@ -3191,7 +3192,7 @@ function Include_ShowError404($idortext,$file,$line){
 }
 
 /**
- * Êä³öºóÌ¨Ö¸¶¨×ÖÌåfamily(ÄÚÖÃ²å¼þº¯Êý)
+ * è¾“å‡ºåŽå°æŒ‡å®šå­—ä½“family(å†…ç½®æ’ä»¶å‡½æ•°)
  */
 function Include_AddonAdminFont(){
 	global $zbp;

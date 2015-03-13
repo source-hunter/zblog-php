@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require '../function/c_system_base.php';
 
 if(isset($_GET['rsd'])){
@@ -644,6 +644,8 @@ Add_Filter_Plugin('Filter_Plugin_Zbp_ShowError','RespondError');
 
 $xmlstring = file_get_contents( 'php://input' );
 //Logs($xmlstring);
+//defense XXE
+libxml_disable_entity_loader(true);
 $xml = simplexml_load_string($xmlstring);
 
 if($xml){
