@@ -1684,6 +1684,8 @@ function BatchComment() {
 			CountPostArray(array($cmt->LogID), -1);
 			CountCommentNums(0,+1);
 		}
+
+	$zbp->AddBuildModule('comments');
 }
 
 ################################################################################################################
@@ -1730,7 +1732,9 @@ function PostCategory() {
 	FilterMeta($cate);
 
 	// 此处用作刷新分类内文章数据使用，不作更改
-	CountCategory($cate);
+	if ($cate->ID > 0){
+		CountCategory($cate);
+	}
 
 	$cate->Save();
 
@@ -1861,6 +1865,12 @@ function DelTag() {
 function PostMember() {
 	global $zbp;
 	if (!isset($_POST['ID'])) return;
+
+	if (!$zbp->CheckRights('MemberAll')) {
+		if ($_POST['ID'] != $zbp->user->ID) {
+			$zbp->ShowError(6, __FILE__, __LINE__);
+		}
+	}
 
 	if (!$zbp->CheckRights('MemberAll')) {
 		unset($_POST['Level']);
@@ -2330,6 +2340,9 @@ function SaveSetting() {
 
 	$zbp->option['ZC_BLOG_HOST'] = trim($zbp->option['ZC_BLOG_HOST']);
 	$zbp->option['ZC_BLOG_HOST'] = trim($zbp->option['ZC_BLOG_HOST'], '/') . '/';
+	if(	$zbp->option['ZC_BLOG_HOST'] == '/' ){
+		$zbp->option['ZC_BLOG_HOST'] = $zbp->host;
+	}
 	$lang = require($zbp->usersdir . 'language/' . $zbp->option['ZC_BLOG_LANGUAGEPACK'] . '.php');
 	$zbp->option['ZC_BLOG_LANGUAGE'] = $lang['lang'];
 	$zbp->option['ZC_BLOG_PRODUCT'] = 'Z-BlogPHP';

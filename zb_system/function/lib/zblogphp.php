@@ -435,8 +435,10 @@ class ZBlogPHP {
 		}		
 
 		if($this->option['ZC_PERMANENT_DOMAIN_ENABLE']==true){
-			$this->host=$this->option['ZC_BLOG_HOST'];
-			$this->cookiespath=substr($this->host,strpos($this->host,'/',8));
+			if(str_replace(array('https://','http://'),array('',''),$this->host) != str_replace(array('https://','http://'),array('',''),$this->option['ZC_BLOG_HOST']) ){
+				$this->host=$this->option['ZC_BLOG_HOST'];
+			}
+			$this->cookiespath=strstr( str_replace('://','',$this->host) , '/');
 		}else{
 			$this->option['ZC_BLOG_HOST']=$this->host;
 		}
@@ -1170,6 +1172,10 @@ class ZBlogPHP {
 		if(count($lv2)>0)$this->categorylayer=3;
 		if(count($lv3)>0)$this->categorylayer=4;
 
+		if( !is_array($lv0[0]) ){
+			$lv0[0] = array();
+		}
+
 		foreach ($lv0[0] as $id0) {
 			$this->categorysbyorder[$id0]=&$this->categorys[$id0];
 			if(!isset($lv1[$id0])){continue;}
@@ -1299,7 +1305,7 @@ class ZBlogPHP {
 	 * @return null
 	 */
 	public function LoadLanguage($type,$id,$default=''){
-		$default = FilterCorrectName($default);
+		$default = str_replace(array('/','\\'),'',$default);
 		if($type=='system'){
 			if($default=='')$default=$this->option['ZC_BLOG_LANGUAGEPACK'];
 			if(is_readable($f=$this->path . 'zb_users/language/' . $default . '.php')){
